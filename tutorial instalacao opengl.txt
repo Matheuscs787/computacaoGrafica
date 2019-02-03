@@ -1,0 +1,157 @@
+Descompactar o arquivo .7z do MinGW e colocar a pasta principal na raiz do disco rígido (C:\mingw64);
+
+Abrir as Variáveis de Ambiente de Sistema e adicionar a pasta “C:\mingw64\bin” à variável PATH;
+
+Descompactar o arquivo .zip do FreeGlut e colocar a pasta principal dentro da pasta do mingw64 preferencialmente;
+
+Ao criar um novo projeto em C++ no Eclipse, selecione o compilador MinGW, e utilize como base o projeto “Hello World” padrão;
+
+Vá até as propriedades do projeto, vá em C/C++ Build > Settings > GCC C++ Compiler > Includes e adicione a pasta “include” do FreeGLUT (C:\mingw64\freeglut\include) na lista de include paths;
+
+Ainda nas propriedades da C/C++ Build, vá em MinGW C++ Linker > Libraries e adicione as bibliotecas opengl32, glu32 e freeglut na lista de libraries;
+
+Adicione a pasta “C:\mingw64\freeglut\lib\x64” do FreeGLUT à library search path na mesma tela. (Caso utilize um sistema de 32 bits, adicione a freeglut/lib/ em vez disso);
+
+Copie o arquivo “freeglut.dll” na pasta freeglut/bin/x64 para a C:\Windows\System32 OU apenas copie este arquivo para a mesma pasta onde o executável do projeto está localizado (provavelmente dentro de “seu_projeto\Debug\”)
+
+Teste seu código e verifique se o programa roda normalmente.
+
+
+
+
+#include <stdio.h>
+#include <GL/glut.h>
+
+void desenhar(void){
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-10,10,-10,10);
+    glPointSize(35.0);
+
+glBegin(GL_POINTS);
+    glColor3f(0, 0, 0);//PRETO
+    glVertex2i(-2,8);
+    glVertex2i(-1,8);
+    glVertex2i(0,8);
+    glVertex2i(1,8);
+    glVertex2i(2,8);
+    glVertex2i(3,8);
+    glVertex2i(3,7);
+    glVertex2i(4,7);
+    glVertex2i(5,7);
+    glVertex2i(-2,7);
+    glVertex2i(-3,7);
+    glVertex2i(-4,7);
+    glVertex2i(-4,6);
+    glVertex2i(-5,6);
+    glVertex2i(5,6);
+    glVertex2i(6,6);
+    glVertex2i(6,5);
+    glVertex2i(6,4);
+    glVertex2i(-5,5);
+    glVertex2i(-5,4);
+    glVertex2i(-6,4);
+    glVertex2i(-6,3);
+    glVertex2i(-6,-4);
+    glVertex2i(-6,-5);
+    glVertex2i(-6,-6);
+    glVertex2i(-5,-4);
+    glVertex2i(-5,-5);
+    glVertex2i(-5,-6);
+    glVertex2i(-5,-7);
+    glVertex2i(-5,-8);
+    glVertex2i(-4,-8);
+    glVertex2i(-4,-4);
+    glVertex2i(5,-4);
+    glVertex2i(5,-8);
+    glVertex2i(5,-4);
+    glVertex2i(6,-4);
+    glVertex2i(6,-5);
+    glVertex2i(6,-6);
+    glVertex2i(6,-7);
+    glVertex2i(6,-8);
+    glVertex2i(7,-4);
+    glVertex2i(7,-5);
+    glVertex2i(7,-6);
+    glVertex2i(7,4);
+    glVertex2i(7,3);
+    glVertex2i(-1,-4);
+    glVertex2i(-1,-5);
+    glVertex2i(2,-4);
+    glVertex2i(2,-5);
+
+    for(int a=-4;a<4;a++){
+    	glVertex2i(8,a);
+    	glVertex2i(-7,a);
+    }
+
+    for(int l=-4;l<6;l++){
+    	glVertex2i(l,-9);
+    	glVertex2i(l,-3);
+    }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+glColor3f(1.0, 0.0, 0.0);//VERMELHO
+    glVertex2i(-1,7);
+    glVertex2i(-1,6);
+    glVertex2i(-2,5);
+    glVertex2i(-2,6);
+    glVertex2i(-3,6);
+    glVertex2i(-3,5);
+
+    glVertex2i(2,7);
+    glVertex2i(2,6);
+    glVertex2i(3,5);
+    glVertex2i(3,6);
+    glVertex2i(4,6);
+    glVertex2i(4,5);
+
+    glVertex2i(-5,-1);
+    glVertex2i(6,-1);
+
+    for(int a=0;a<4;a++){
+    	glVertex2i(-5,a);
+    	glVertex2i(-4,a);
+    	glVertex2i(5,a);
+    	glVertex2i(6,a);
+    }
+
+    for(int a=-1;a<3;a++){
+    	glVertex2i(-6,a);
+    	glVertex2i(7,a);
+    }
+
+    for(int a=-2;a<3;a++){
+    	for(int l=-1;l<3;l++){
+    		glVertex2i(l,a);
+    	}
+    }
+
+    for(int a=-1;a<2;a++){
+    	glVertex2i(-2,a);
+    	glVertex2i(3,a);
+    }
+
+glEnd();
+glFlush();
+}
+
+void reshape(int w, int h){
+	glViewPort(0,0(GLsizei)w, (GLsizei)h);
+	glLoadIdentify();
+}
+
+int main(int argc, char **argv){
+
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(700, 700);
+    glutCreateWindow("Toad Mario");
+    glutDisplayFunc(desenhar);
+    glClearColor(1.0, 1.0, 1.0, 0.0);
+    glutMainLoop();
+}
+
+//Matheus Cezar de Souza
