@@ -1,2 +1,2 @@
 # computacao Grafica
-Atividades inicias de computação gráfica, feitas em c++ utilizando o opengl
+Atividades inicias de computação gráfica, feitas em c++ utilizando o opengl, freeglut, mingw
